@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
+
+<? php  include ( "conexion.php" ); ?> 
+<? php  include ( "header.php" ); ?> 
+
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,6 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -126,76 +131,86 @@
                                 <div class="card bg-success text-white mb-4">
                                     <!--<div class="card-body">Paginas de Proyectos</div>-->
                                     <a href="proyecto.php" class="btn btn-primary, card-body,small text-white stretched-link" >Paginas de Proyectos</a>
-                                    <!--<div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>-->
                                 </div>
                             </div>
                            
-                        </div>
-
-                        <!--comentando desde aqui -->
-
-                       <!-- <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Ejemplo de Grafico de Areas
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Ejemplo de Grafico de Barras
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>-->
-
-                        <!--Fin del comentario-->
-
-
-                        <!--Inicio del comentario-->
-
-                        <!--<div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Ejemplo de Tabla de Datos
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Usuario</th>
-                                            <th>Password</th>
-                                            <th>Nombre</th>
-                                            <th>Tipo Usuario</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Usuario</th>
-                                            <th>Password</th>
-                                            <th>Nombre</th>
-                                            <th>Tipo Usuario</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                </table>
-                            </div>
-                        </div>-->
-
-                        <!--Fin del comentario-->
+                        </div>                     
+ 
 
                     </div>
+                    <div  class = " container p-4 " >
+                                      <div  class = " row" >
+                                        <div  class = " col-md-4 " >
+
+                                          <! - MENSAJES con el cual vamos a llenar las filas ->
+
+                                          <? php  if ( isset ( $ _SESSION [ 'message' ])) { ?>
+                                          <div  class = " alert alert- <? =  $ _SESSION [ 'message_type' ] ?> alert-dismissible fade show " role = " alert " >
+                                            <? =  $ _SESSION [ 'message' ] ?>
+                                            <button  type = " button " class = " close " data-dismiss = " alert " aria-label = " Close " >
+                                              <span  aria-hidden = " true " > &times; </span>
+                                            </button>
+                                          </div >
+                                          <? php  session_unset (); } ?>  
+
+
+                                          <! - AÑADIR FORMULARIO DE TAREA ->
+                                          <div  class = " card card-body " >
+                                            <form  action = " save_task.php " method = " POST " >
+                                              <div  class = " form-group " > 
+                                                <input  type = " text " name = " title " class = " form-control " placeholder = " Task Title " autofocus >
+                                              </div >
+
+                                              <div  class = " form-group " >
+                                                <textarea  name = " description " rows = " 2 " class = " form-control " placeholder = " Descripción de la tarea " > </textarea >
+                                              </div >
+
+                                              <input  type = " submit " name = " save_task " class = " btn btn-success btn-block " value = " Guardar tarea " >
+
+                                            </form>
+                                          </div >
+                                        </div >
+
+                                        
+                                        <div  class = " col-md-8 " >
+                                          <table  class = " table table-bordered " >
+                                            <thead>
+                                              <tr>
+                                                <th> Título </th>
+                                                <th> Descripción </th>
+                                                <th> Creado en </th>
+                                                <th> Acción </th> 
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+
+                                              <?php
+                                              $query = "SELECT * FROM task"; 
+                                              $result_tasks = mysqli_query($mysqli, $query);   
+
+                                              while($row = mysqli_fetch_assoc($result_tasks)) { ?>
+                                              <tr>
+                                                <td><?php echo $row['title']; ?></td>
+                                                <td><?php echo $row['description']; ?></td>
+                                                <td><?php echo $row['created_at']; ?></td>
+                                                <td>
+                                                  <a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-secondary"> 
+                                                    <i class="fas fa-marker"></i>
+                                                  </a>
+                                                  <a href="delete_task.php?id=<?php echo $row['id']?>" class="btn btn-danger">
+                                                    <i class="far fa-trash-alt"></i>
+                                                  </a>
+                                                </td>
+                                              </tr>
+                                              <?php } ?>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+
                 </main>
+                <?php include('includes/footer.php'); ?>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
