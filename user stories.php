@@ -1,4 +1,5 @@
-
+<!DOCTYPE html>
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,7 +15,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -120,17 +120,18 @@
                            <!-- <li class="breadcrumb-item active">Tablero</li>-->
                         </ol>
                         <div class="row">
-                           
-                          
+                            
                             <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <!--<div class="card-body">Paginas de Proyectos</div>-->
-                                    <a href="proyecto.php" class="btn btn-primary, card-body,small text-white stretched-link" >Paginas de Proyectos</a>
+                                <div class="card bg-danger text-white mb-4">
+                                    <!--<div class="card-body">Hoja de User Stories</div>-->
+                                    <a href="user stories.php" class="btn btn-primary, card-body,small text-white stretched-link" >User Stories</a>
+                                    <!--<div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>-->
                                 </div>
                             </div>
-                           
-                        </div>                     
- 
+                        </div>
 
 <?php include("db.php"); ?>
 
@@ -152,14 +153,14 @@
 
       <!-- ADD TASK FORM -->
       <div class="card card-body">
-        <form action="save_task.php" method="POST">
+        <form action="save_task3.php" method="POST">
           <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="Task Title" autofocus>
+            <input type="text" name="title3" class="form-control" placeholder="Task3 Title3" autofocus>
           </div>
           <div class="form-group">
-            <textarea name="description" rows="2" class="form-control" placeholder="Task Description"></textarea>
+            <textarea name="description3" rows="2" class="form-control" placeholder="Task3 Description3"></textarea>
           </div>
-          <input type="submit" name="save_task" class="btn btn-success btn-block" value="Save Task">
+          <input type="submit" name="save_task3" class="btn btn-success btn-block" value="Save3 Task3">
         </form>
       </div>
     </div>
@@ -167,28 +168,28 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Created At</th>
-            <th>Action</th>
+            <th>Title3</th>
+            <th>Description3</th>
+            <th>Created At3</th>
+            <th>Action3</th>
           </tr>
         </thead>
         <tbody>
 
           <?php
-          $query = "SELECT * FROM task";
-          $result_tasks = mysqli_query($conn, $query);    
+          $query3 = "SELECT * FROM task3";
+          $result_tasks3 = mysqli_query($conn, $query3);    
 
-          while($row = mysqli_fetch_assoc($result_tasks)) { ?>
+          while($row = mysqli_fetch_assoc($result_tasks3)) { ?>
           <tr>
-            <td><?php echo $row['title']; ?></td>
-            <td><?php echo $row['description']; ?></td>
-            <td><?php echo $row['created_at']; ?></td>
+            <td><?php echo $row['title3']; ?></td>
+            <td><?php echo $row['description3']; ?></td>
+            <td><?php echo $row['created_at3']; ?></td>
             <td>
-              <a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-secondary">
+              <a href="edit3.php?id3=<?php echo $row['id3']?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
-              <a href="delete_task.php?id=<?php echo $row['id']?>" class="btn btn-danger">
+              <a href="delete_task3.php?id3=<?php echo $row['id3']?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
@@ -202,8 +203,22 @@
 
 <?php include('includes/footer.php'); ?>
 
-
-                
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
