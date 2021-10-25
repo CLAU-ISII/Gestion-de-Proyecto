@@ -3,7 +3,7 @@
 
 session_start();
 
-if (!isset($_SESSION['id5'])) {
+if (!isset($_SESSION['id'])) {
 // code...
 header("Location: index.php");
 }
@@ -13,6 +13,8 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
 
 ?> 
+
+
 
 
 <!DOCTYPE html>
@@ -52,10 +54,10 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
 <!-- Navbar Search-->
 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-<div class="input-group">
-<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-</div>
+    <div class="input-group">
+        <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+    </div>
 </form>
 
 <!-- Navbar-->
@@ -162,12 +164,11 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
  <li class="breadcrumb-item active">Tablero</li>
 </ol>-->
 <div class="row">
-<div class="col-xl-3 col-md-6">
-    <div class="card bg-primary text-white mb-4">
-        <a href="backlog.php" class="btn btn-primary. card-body,small text-white stretched-link " >Backlog</a>
-                    
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <a href="historia.php" class="btn btn-primary, card-body,small text-white stretched-link " >Historia de Usuario</a>             
+         </div>
     </div>
-</div>
             
 </div>
 
@@ -190,16 +191,16 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
           </div>
           <?php session_unset(); } ?>
 
-          <!-- ADD TASK2 FORM -->
+          <!-- ADD task4 FORM -->
           <div class="card card-body">
-            <form action="save_task2.php" method="POST">
+            <form action="save_task4.php" method="POST">
               <div class="form-group">
-                <input type="text" name="title2" class="form-control" placeholder="Ingrese Tema" autofocus autocomplete="off">
+                <input type="text" name="title4" class="form-control" placeholder="Ingrese Tema" autofocus  autocomplete="off" >
               </div>
               <div class="form-group">
-                <textarea name="description2" rows="2" class="form-control" placeholder="Describa Tema"></textarea>
+                <textarea name="description4" rows="2" class="form-control" placeholder="Describa Tema"></textarea>
               </div>
-              <input type="submit" name="save_task2" class="btn btn-success btn-block" value="Guardar">
+              <input type="submit" name="save_task4" class="btn btn-success btn-block" value="Guardar">
             </form>
           </div>
         </div>
@@ -216,19 +217,19 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             <tbody>
 
               <?php
-              $query2 = "SELECT * FROM task2";
-              $result_tasks2 = mysqli_query($conn, $query2);    
+              $query4 = "SELECT * FROM task4";
+              $result_tasks4 = mysqli_query($conn, $query4);    
 
-              while($row = mysqli_fetch_assoc($result_tasks2)) { ?>
+              while($row = mysqli_fetch_assoc($result_tasks4)) { ?>
               <tr>
-                <td><?php echo $row['title2']; ?></td>
-                <td><?php echo $row['description2']; ?></td>
-                <td><?php echo $row['created_at2']; ?></td>
+                <td><?php echo $row['title4']; ?></td>
+                <td><?php echo $row['description4']; ?></td>
+                <td><?php echo $row['created_at4']; ?></td>
                 <td>
-                  <a href="edit2.php?id2=<?php echo $row['id2']?>" class="btn btn-secondary">
+                  <a href="edit4.php?id4=<?php echo $row['id4']?>" class="btn btn-secondary">
                     <i class="fas fa-marker"></i>
                   </a>
-                  <a href="delete_task2.php?id2=<?php echo $row['id2']?>" class="btn btn-danger">
+                  <a href="delete_task4.php?id4=<?php echo $row['id4']?>" class="btn btn-danger">
                     <i class="far fa-trash-alt"></i>
                   </a>
                 </td>

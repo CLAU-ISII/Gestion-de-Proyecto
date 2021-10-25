@@ -1,5 +1,8 @@
-  <?php 
+<?php
 
-	$mysqli = new mysqli("localhost","root","","gestordeproyectos");
 
- ?>
+$mysqli = new mysqli("localhost", "root","","dbsistemas2");
+
+
+
+?>

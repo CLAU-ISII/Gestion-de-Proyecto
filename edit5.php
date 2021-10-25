@@ -12,30 +12,39 @@ $nombre = $_SESSION['nombre'];
 $tipo_usuario = $_SESSION['tipo_usuario'];
 
 include("db.php");
-$title3 = '';
-$description3= '';
+$usuario = '';
+$password= '';
+$login= '';
+$tipo_usuario= '';
 
-if  (isset($_GET['id3'])) {
-  $id3 = $_GET['id3'];
-  $query3 = "SELECT * FROM task3 WHERE id3=$id3";
-  $result3 = mysqli_query($conn, $query3);
-  if (mysqli_num_rows($result3) == 1) {
-    $row = mysqli_fetch_array($result3);
-    $title3 = $row['title3'];
-    $description3 = $row['description3'];
+
+if  (isset($_GET['id5'])) {
+  $id5 = $_GET['id5'];
+  $query5 = "SELECT * FROM usuario WHERE id5=$id5";
+  $result5 = mysqli_query($conn, $query5);
+  if (mysqli_num_rows($result5) == 1) {
+    $row = mysqli_fetch_array($result5);
+    $usuario = $row['usuario'];
+    $password = $row['password'];
+    $login = $_SESSION['login'];
+    $tipo_usuario = $_SESSION['tipo_usuario'];
+
   }
 }
 
 if (isset($_POST['update'])) {
-  $id3 = $_GET['id3'];
-  $title3= $_POST['title3'];
-  $description3 = $_POST['description3'];
+  $id5 = $_GET['id5'];
+  $usuario= $_POST['usuario'];
+  $password = $_POST['password'];
+  $login= $_POST['login'];
+  $tipo_usuario= $_POST['tipo_usuario'];
 
-  $query3 = "UPDATE task3 set title3 = '$title3', description3 = '$description3' WHERE id3=$id3";
-  mysqli_query($conn, $query3);
-  //$_SESSION['message'] = 'Task3 Updated Successfully';
+
+  $query5 = "UPDATE usuario set usuario = '$usuario', password = '$password',login = '$login',tipo_usuario = '$tipo_usuario' WHERE id5=$id5";
+  mysqli_query($conn, $query5);
+  //$_SESSION['message'] = 'usuario Updated Successfully';
   $_SESSION['message_type'] = 'warning';
-  header('Location: proyecto.php');
+  header('Location: tablero.php');
 }
 
 ?>
@@ -80,7 +89,7 @@ if (isset($_POST['update'])) {
 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
     <div class="input-group">
         <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-        <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+             <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
     </div>
 </form>
 
@@ -189,9 +198,9 @@ if (isset($_POST['update'])) {
         </ol>-->
      <div class="row">
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-success text-white mb-4">
+            <div class="card bg-danger text-white mb-4">
                      <!--<div class="card-body">Paginas de Proyectos</div>-->
-                    <a href="proyecto.php" class="btn btn-primary, card-body,small text-white stretched-link" >Paginas de Proyectos</a>
+                    <a href="tablero.php" class="btn btn-primary, card-body,small text-white stretched-link" >Usuario</a>
             </div>
         </div>
                     
@@ -204,12 +213,18 @@ if (isset($_POST['update'])) {
   <div class="row">
     <div class="col-md-4 mx-auto">
       <div class="card card-body">
-      <form action="edit3.php?id3=<?php echo $_GET['id3']; ?>" method="POST">
+     <form action="edit5.php?id5=<?php echo $_GET['id5']; ?>" method="POST">
         <div class="form-group">
-          <input name="title3" type="text" class="form-control" value="<?php echo $title3; ?>" placeholder="Update title3">
+          <input name="usuario" type="text" class="form-control" value="<?php echo $usuario; ?>" placeholder="Update usuario">
         </div>
         <div class="form-group">
-        <textarea name="description3" class="form-control" cols="30" rows="10"><?php echo $description3;?></textarea>
+        <textarea name="password" class="form-control" cols="30" rows="10"><?php echo $password;?></textarea>
+        </div>
+        <div class="form-group">
+          <input name="login" type="text" class="form-control" value="<?php echo $login; ?>" placeholder="Update login">
+        </div>
+        <div class="form-group">
+          <input name="tipo_usuario" type="text" class="form-control" value="<?php echo $tipo_usuario; ?>" placeholder="Update tipo usuario">
         </div>
         <button class="btn-success" name="update">
           Update

@@ -12,30 +12,30 @@ $nombre = $_SESSION['nombre'];
 $tipo_usuario = $_SESSION['tipo_usuario'];
 
 include("db.php");
-$title3 = '';
-$description3= '';
+$title4 = '';
+$description4= '';
 
-if  (isset($_GET['id3'])) {
-  $id3 = $_GET['id3'];
-  $query3 = "SELECT * FROM task3 WHERE id3=$id3";
-  $result3 = mysqli_query($conn, $query3);
-  if (mysqli_num_rows($result3) == 1) {
-    $row = mysqli_fetch_array($result3);
-    $title3 = $row['title3'];
-    $description3 = $row['description3'];
+if  (isset($_GET['id4'])) {
+  $id4 = $_GET['id4'];
+  $query3 = "SELECT * FROM task4 WHERE id4=$id4";
+  $result4 = mysqli_query($conn, $query3);
+  if (mysqli_num_rows($result4) == 1) {
+    $row = mysqli_fetch_array($result4);
+    $title4 = $row['title4'];
+    $description4 = $row['description4'];
   }
 }
 
 if (isset($_POST['update'])) {
-  $id3 = $_GET['id3'];
-  $title3= $_POST['title3'];
-  $description3 = $_POST['description3'];
+  $id4 = $_GET['id4'];
+  $title4= $_POST['title4'];
+  $description4 = $_POST['description4'];
 
-  $query3 = "UPDATE task3 set title3 = '$title3', description3 = '$description3' WHERE id3=$id3";
+  $query3 = "UPDATE task4 set title4 = '$title4', description4 = '$description4' WHERE id4=$id4";
   mysqli_query($conn, $query3);
-  //$_SESSION['message'] = 'Task3 Updated Successfully';
+  //$_SESSION['message'] = 'task4 Updated Successfully';
   $_SESSION['message_type'] = 'warning';
-  header('Location: proyecto.php');
+  header('Location: historia.php');
 }
 
 ?>
@@ -80,7 +80,7 @@ if (isset($_POST['update'])) {
 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
     <div class="input-group">
         <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-        <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+             <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
     </div>
 </form>
 
@@ -189,9 +189,9 @@ if (isset($_POST['update'])) {
         </ol>-->
      <div class="row">
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-success text-white mb-4">
+            <div class="card bg-danger text-white mb-4">
                      <!--<div class="card-body">Paginas de Proyectos</div>-->
-                    <a href="proyecto.php" class="btn btn-primary, card-body,small text-white stretched-link" >Paginas de Proyectos</a>
+                    <a href="historia.php" class="btn btn-primary, card-body,small text-white stretched-link" >Historia de Usuario</a>
             </div>
         </div>
                     
@@ -204,12 +204,12 @@ if (isset($_POST['update'])) {
   <div class="row">
     <div class="col-md-4 mx-auto">
       <div class="card card-body">
-      <form action="edit3.php?id3=<?php echo $_GET['id3']; ?>" method="POST">
+      <form action="edit4.php?id4=<?php echo $_GET['id4']; ?>" method="POST">
         <div class="form-group">
-          <input name="title3" type="text" class="form-control" value="<?php echo $title3; ?>" placeholder="Update title3">
+          <input name="title4" type="text" class="form-control" value="<?php echo $title4; ?>" placeholder="Update title4">
         </div>
         <div class="form-group">
-        <textarea name="description3" class="form-control" cols="30" rows="10"><?php echo $description3;?></textarea>
+        <textarea name="description4" class="form-control" cols="30" rows="10"><?php echo $description4;?></textarea>
         </div>
         <button class="btn-success" name="update">
           Update

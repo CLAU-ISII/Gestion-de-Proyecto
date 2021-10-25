@@ -15,7 +15,7 @@ if (isset($_POST['save_task3'])) {
   $_SESSION['message'] = 'Task3 Saved Successfully';
   $_SESSION['message_type'] = 'success';
   
-  header("Location: index3.php");
+  header("Location: proyecto.php");
 
 }
 

@@ -1,11 +1,27 @@
+    <?php 
 
+
+    session_start();
+
+    if (!isset($_SESSION['id'])) {
+        // code...
+        header("Location: index.php");
+    }
+
+    $nombre = $_SESSION['login'];
+    $tipo_usuario = $_SESSION['tipo_usuario'];
+
+
+ ?> 
+<!DOCTYPE html>
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Pagina Principal - SB Admin</title>
+        <title>Sistema Web</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/bootstrap-themes.css" rel="stylesheet">
@@ -19,7 +35,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="principal.html">Inicio</a>
+            <a class="navbar-brand ps-3" href="principal.php">Sistema Web</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -46,12 +62,15 @@
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
+
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Centro</div>
-                            <a class="nav-link" href="principal.html">
+                           <!--<div class="sb-sidenav-menu-heading">Core</div>-->
+                            <a class="nav-link" href="principal.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Panel
+                                Mi Sitio
                             </a>
+                            <?php if ($tipo_usuario==1) { ?>
+
                             <div class="sb-sidenav-menu-heading">Interfaz</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -60,7 +79,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Panel de Navegacion</a>
+                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                                 </nav>
                             </div>
@@ -88,19 +107,20 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
+                                            <a class="nav-link" href="401.html">401 Pagina</a>
+                                            <a class="nav-link" href="404.html">404 Pagina</a>
+                                            <a class="nav-link" href="500.html">500 Pagina</a>
                                         </nav>
                                     </div>
                                 </nav>
                             </div>
+                            <?php } ?>   
                             <div class="sb-sidenav-menu-heading">Complementos</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Graficos
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="tabla.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tablas
                             </a>
@@ -116,9 +136,7 @@
                  <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Menu</h1>
-                        <ol class="breadcrumb mb-4">
-                           <!-- <li class="breadcrumb-item active">Tablero</li>-->
-                        </ol>
+                        
                         <div class="row">
                            
                           
@@ -134,7 +152,7 @@
 
 <?php include("db.php"); ?>
 
-<?php include('includes/header.php'); ?>
+<?php include('header.php'); ?>
 
 <main class="container p-4">
   <div class="row">
@@ -152,14 +170,15 @@
 
       <!-- ADD TASK FORM -->
       <div class="card card-body">
-        <form action="save_task.php" method="POST">
+        <form action="save_task3.php" method="POST">
           <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="Task Title" autofocus>
+            <input type="text" name="title3" class="form-control" placeholder="Ingrese Tema" autofocus autocomplete="off">
           </div>
+
           <div class="form-group">
-            <textarea name="description" rows="2" class="form-control" placeholder="Task Description"></textarea>
+            <textarea name="description3" rows="2" class="form-control" placeholder="Describa Tema"></textarea>
           </div>
-          <input type="submit" name="save_task" class="btn btn-success btn-block" value="Save Task">
+          <input type="submit" name="save_task3" class="btn btn-success btn-block" value="Guardar">
         </form>
       </div>
     </div>
@@ -167,28 +186,28 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Created At</th>
-            <th>Action</th>
+            <th>Tema</th>
+            <th>Descripcion</th>
+            <th>Fecha de Creacion</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody>
 
           <?php
-          $query = "SELECT * FROM task";
-          $result_tasks = mysqli_query($conn, $query);    
+          $query3 = "SELECT * FROM task3";
+          $result_tasks3 = mysqli_query($conn, $query3);    
 
-          while($row = mysqli_fetch_assoc($result_tasks)) { ?>
+          while($row = mysqli_fetch_assoc($result_tasks3)) { ?>
           <tr>
-            <td><?php echo $row['title']; ?></td>
-            <td><?php echo $row['description']; ?></td>
-            <td><?php echo $row['created_at']; ?></td>
+            <td><?php echo $row['title3']; ?></td>
+            <td><?php echo $row['description3']; ?></td>
+            <td><?php echo $row['created_at3']; ?></td>
             <td>
-              <a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-secondary">
+              <a href="edit3.php?id3=<?php echo $row['id3']?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
-              <a href="delete_task.php?id=<?php echo $row['id']?>" class="btn btn-danger">
+              <a href="delete_task3.php?id3=<?php echo $row['id3']?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
@@ -200,8 +219,25 @@
   </div>
 </main>
 
-<?php include('includes/footer.php'); ?>
+<?php include('footer.php'); ?>
 
+</div>
+                </main>
+
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
 
                 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

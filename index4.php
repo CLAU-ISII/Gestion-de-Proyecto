@@ -19,14 +19,14 @@
 
                 <!-- ADD TASK FORM -->
                 <div class="card card-body">
-                    <form action="save_task3.php" method="POST">
+                    <form action="save_task4.php" method="POST">
                         <div class="form-group">
-                            <input type="text" name="title3" class="form-control" placeholder="Ingrese Tema" autofocus>
+                            <input type="text" name="title4" class="form-control" placeholder="Ingrese Tema" autofocus>
                         </div>
                         <div class="form-group">
-                            <textarea name="description3" rows="2" class="form-control" placeholder="Describa Tema"></textarea>
+                            <textarea name="description4" rows="2" class="form-control" placeholder="Describa Tema"></textarea>
                         </div>
-                        <input type="submit" name="save_task3" class="btn btn-success btn-block" value="Guardar">
+                        <input type="submit" name="save_task4" class="btn btn-success btn-block" value="Guardar">
                     </form>
                 </div>
             </div>
@@ -43,19 +43,19 @@
                     <tbody>
 
                         <?php
-                        $query3 = "SELECT * FROM task3";
-                        $result_tasks3 = mysqli_query($conn, $query3);    
+                        $query4 = "SELECT * FROM task4";
+                        $result_tasks4 = mysqli_query($conn, $query4);    
 
-                        while($row = mysqli_fetch_assoc($result_tasks3)) { ?>
+                        while($row = mysqli_fetch_assoc($result_tasks4)) { ?>
                             <tr>
-                                <td><?php echo $row['title3']; ?></td>
-                                <td><?php echo $row['description3']; ?></td>
-                                <td><?php echo $row['created_at3']; ?></td>
+                                <td><?php echo $row['title4']; ?></td>
+                                <td><?php echo $row['description4']; ?></td>
+                                <td><?php echo $row['created_at4']; ?></td>
                                 <td>
-                                    <a href="edit3.php?id3=<?php echo $row['id3']?>" class="btn btn-secondary">
+                                    <a href="edit4.php?id4=<?php echo $row['id4']?>" class="btn btn-secondary">
                                         <i class="fas fa-marker"></i>
                                     </a>
-                                    <a href="delete_task3.php?id3=<?php echo $row['id3']?>" class="btn btn-danger">
+                                    <a href="delete_task4.php?id4=<?php echo $row['id4']?>" class="btn btn-danger">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </td>

@@ -5,7 +5,7 @@ $conn = mysqli_connect(
   'localhost',
   'root',
   '',
-  'gestordeProyectos'
+  'dbsistemas2'
 ) 
 or die(mysqli_erro($mysqli));
 
